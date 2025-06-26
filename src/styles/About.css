@@ -1,0 +1,37 @@
+.about-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.about-intro {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.game-section {
+  margin-bottom: 30px;
+}
+
+.game-section h2 {
+  color: #0077cc;
+  margin-bottom: 10px;
+}
+
+.game-section p {
+  font-size: 16px;
+  color: #444;
+}
+
+.about-footer {
+  font-size: 17px;
+  font-weight: 500;
+  color: #222;
+  text-align: center;
+  margin-top: 40px;
+}

@@ -1,0 +1,125 @@
+.memory-wrapper {
+  position: relative;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.best-stats {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f0f8ff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.best-stats h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #2e8b57;
+}
+
+.best-stats p {
+  margin: 4px 0;
+}
+
+.memory-wrapper h1 {
+  font-size: 28px;
+  color: #141313;
+}
+
+.memory-timer {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.animal-grid-4x5 {
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.memory-card {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.memory-card:hover {
+  transform: scale(1.05);
+}
+
+.memory-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-finished h2 {
+  font-size: 26px;
+  color: #2e8b57;
+}
+
+.memory-restart {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2e8b57;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.memory-restart:hover {
+  background-color: #246b45;
+}
+
+.stats-box {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stats-box h3 {
+  margin-bottom: 10px;
+  color: #2e8b57;
+}
+
+.stats-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stats-box li {
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #333;
+}

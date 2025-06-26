@@ -1,0 +1,137 @@
+.memory-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.memory-wrapper h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #2e2e2e;
+}
+
+.memory-timer {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 15px;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.memory-card {
+  width: 100px;
+  height: 100px;
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.memory-card:hover {
+  transform: scale(1.05);
+}
+
+.memory-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-empty {
+  width: 100%;
+  height: 100%;
+  background-color: #e6ffe6;
+  border-radius: 10px;
+}
+
+.memory-finished {
+  margin-top: 20px;
+}
+
+.memory-finished h2 {
+  font-size: 28px;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+.memory-finished h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+.memory-restart,
+.memory-next {
+  margin: 12px 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #0077cc;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.memory-restart:hover,
+.memory-next:hover {
+  background-color: #005fa3;
+}
+
+.best-stats {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: #f3f3f3;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  font-size: 14px;
+}
+
+.best-stats h4 {
+  margin-bottom: 6px;
+  color: #0077cc;
+}
+
+.stats-box {
+  margin-top: 25px;
+  background-color: #f7f7f7;
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.stats-box h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.stats-box ul {
+  padding-left: 20px;
+}
+
+.stats-box li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}

@@ -1,0 +1,80 @@
+.register-page {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  color: white;
+
+  /* ✅ Keep form centered even if content shifts */
+  align-items: center;
+}
+
+.register-form h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.register-form input {
+  padding: 10px;
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  backdrop-filter: blur(4px);
+}
+
+.register-form input::placeholder {
+  color: #eee;
+}
+
+.register-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.register-form button:hover {
+  background-color: #005fa3;
+}
+
+.register-error {
+  background-color: rgba(255, 0, 0, 0.6);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 250px;
+}
+
+.redirect-login {
+  font-size: 14px;
+}
+
+.redirect-link {
+  color: #c8181e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.redirect-link:hover {
+  text-decoration: underline;
+}

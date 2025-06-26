@@ -1,0 +1,230 @@
+/* Game4.css */
+
+/* Game container */
+.game4background{
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.robet{
+  position: absolute;
+  top : 30px;
+  right: 0px;
+  width: 60vh;
+  height: 100vh;
+}
+.human{
+  position: absolute;
+  top : 30px;
+  left: 0px;
+  width: 60vh;
+  height: 100vh;
+}
+.backimage{
+  background-color: #558b2f;
+}
+.game-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdfdfd;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Scoreboard */
+.score {
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.player-score,
+.computer-score {
+  background-color: #e3f2fd;
+  padding: 14px 30px;
+  border-radius: 10px;
+  color: #1565c0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Symbol Display */
+.symble {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin: 20px 0;
+}
+
+.symble img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+/* Runs buttons */
+.runs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.runs button {
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border: 2px solid #90caf9;
+  border-radius: 12px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.runs button:hover {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+/* Toss section */
+.tossbox {
+  margin-top: 30px;
+  background-color: #f1f8e9;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.tossName h1 {
+  font-size: 28px;
+  color: #33691e;
+  margin-bottom: 10px;
+}
+
+.tossName h2 {
+  font-size: 20px;
+  color: #558b2f;
+  margin-bottom: 15px;
+}
+
+.tosses {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.tossimg {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+/* Toss choice buttons */
+.tossbuttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.eachbattu {
+  padding: 12px 20px;
+  font-size: 18px;
+  background-color: #c8e6c9;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.eachbattu:hover {
+  background-color: #81c784;
+  color: white;
+}
+
+/* Batting/Bowling Choice */
+.selectbutuu {
+  margin-top: 25px;
+}
+
+.sekectba {
+  margin: 0 12px;
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: #fff3e0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.sekectba:hover {
+  background-color: #ffb74d;
+  color: white;
+}
+
+/* Result + Restart */
+.restart-box {
+  margin-top: 25px;
+  font-size: 20px;
+  color: #424242;
+}
+
+.restart-box button {
+  margin-top: 12px;
+  padding: 10px 24px;
+  font-size: 16px;
+  background-color: #f8bbd0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.restart-box button:hover {
+  background-color: #ec407a;
+  color: white;
+}
+.stats-box {
+  margin-top: 35px;
+  padding: 20px;
+  border: 2px solid #cfd8dc;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: left;
+}
+
+.stats-box h3 {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 22px;
+  color: #1a237e;
+}
+
+.stats-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.stats-box li {
+  margin-bottom: 8px;
+  font-size: 17px;
+  color: #37474f;
+}
