@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import '../styles/Game2.css';
@@ -7,7 +7,7 @@ const initialNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const Game2 = ({ user }) => {
   const [numbers, setNumbers] = useState([...initialNumbers]);
-  const [visible, setVisible] = useState(Array(numbers.length).fill(false));
+  const [visible, setVisible] = useState(Array(initialNumbers.length).fill(false));
   const [series, setSeries] = useState(1);
   const [gameOver, setGameOver] = useState(false);
   const [find, setFind] = useState(1);
@@ -18,8 +18,8 @@ const Game2 = ({ user }) => {
   const [stats, setStats] = useState(null);
   const [loadingStats, setLoadingStats] = useState(false);
 
-
-  const show = (level) => {
+  // Shuffle and show numbers
+  const show = useCallback((level) => {
     let rotat = [...numbers];
     for (let i = 0; i < 5; i++) {
       const k = Math.floor(Math.random() * rotat.length);
@@ -27,7 +27,7 @@ const Game2 = ({ user }) => {
     }
     setNumbers(rotat);
 
-    let temp = Array(rotat.length).fill(false);
+    const temp = Array(rotat.length).fill(false);
     for (let i = 1; i <= level; i++) {
       const idx = rotat.indexOf(i);
       if (idx !== -1) temp[idx] = true;
@@ -40,7 +40,7 @@ const Game2 = ({ user }) => {
       setFind(1);
       setLock(false);
     }, 1000);
-  };
+  }, [numbers]);
 
   useEffect(() => {
     if (gameOver) {
@@ -63,7 +63,7 @@ const Game2 = ({ user }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [series, gameOver]);
+  }, [series, gameOver, show]);
 
   useEffect(() => {
     axios.get('http://localhost:2089/api/game/fastest/Game2')
@@ -78,13 +78,15 @@ const Game2 = ({ user }) => {
   useEffect(() => {
     if (find > numbers.length) {
       setGameOver(true);
-      axios.post('http://localhost:2089/api/game/score', {
-        userId: user?._id,
-        game: 'Game2',
-        time: 60 - timeLeft
-      }).catch(console.error);
 
-      // Fetch updated stats
+      if (user?._id) {
+        axios.post('http://localhost:2089/api/game/score', {
+          userId: user._id,
+          game: 'Game2',
+          time: 60 - timeLeft
+        }).catch(console.error);
+      }
+
       if (user?.email) {
         setLoadingStats(true);
         axios.get(`http://localhost:2089/game2/${user.email}`)
@@ -98,7 +100,7 @@ const Game2 = ({ user }) => {
           });
       }
     }
-  }, [find]);
+  }, [find, numbers.length, timeLeft, user]);
 
   const handleGuess = (index) => {
     if (visible[index] || gameOver || lock) return;
@@ -155,7 +157,7 @@ const Game2 = ({ user }) => {
       <div className="grid">
         {numbers.map((num, index) => (
           <button
-            className='box'
+            className="box"
             key={index}
             onClick={() => handleGuess(index)}
             disabled={gameOver}
@@ -167,10 +169,10 @@ const Game2 = ({ user }) => {
 
       {gameOver && (
         <div className="controls">
-          <button onClick={restart}>Play Again</button>
-          <button>
-            <NavLink to="/game1">Go to Game 1</NavLink>
-          </button>
+          <button onClick={restart}>🔁 Play Again</button>
+          <NavLink to="/game1">
+            <button>🎯 Go to Game 1</button>
+          </NavLink>
         </div>
       )}
 

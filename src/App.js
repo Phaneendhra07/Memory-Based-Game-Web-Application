@@ -1,8 +1,8 @@
-
 import { createContext, useState } from "react";
-import axios from "axios";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+//import axios from "axios"; // still needed if used in other components
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -15,21 +15,12 @@ import Game2 from './games/Game2';
 import Game3 from './games/Game3';
 import Game4 from "./games/Game4";
 import Profile from './pages/Profile';
-import ProtectedRoute from './components/ProtectedRoute'; // ✅ import this
+import ProtectedRoute from './components/ProtectedRoute';
 
 export const LoginContext = createContext();
 
 function App() {
-  const [user, setUser] = useState(true);
-
-  const handleClick = async (e) => {
-    e.preventDefault();
-    console.log("Handleclick function is clicked");
-
-    const res = await axios.get("http://localhost:2089/users");
-    console.log(res);
-    console.log(res.data.users);
-  };
+  const [user, setUser] = useState(true); // You can make this `null` or `false` based on your actual login logic
 
   return (
     <div className="App">

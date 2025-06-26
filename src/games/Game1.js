@@ -16,13 +16,15 @@ const imageUrls = [
 ];
 
 const Shuffle = (array) => {
-  let result = [...array]; 
+  let result = [...array];
   let k = Math.floor(Math.random() * 6 + 1);
   for (let i = 0; i <= k; i++) {
     result = [...result.slice(k).reverse(), ...result.slice(0, k).reverse()];
-    let temp = result[i]
-    result[i] = result[i+3];
-    result[i+3] = temp;
+    if (i + 3 < result.length) {
+      let temp = result[i];
+      result[i] = result[i + 3];
+      result[i + 3] = temp;
+    }
   }
   return result;
 };
@@ -46,23 +48,8 @@ const Game1 = () => {
     const duplicated = [...imageUrls, ...imageUrls];
     const shuffled = Shuffle(duplicated);
     setImages(shuffled);
-
-    // let numbers = [...Array(16).keys()];
-    // let rotat = [...numbers];
-    // for (let i = 0; i < 5; i++) {
-    //   const k = Math.floor(Math.random() * rotat.length);
-    //   rotat = [...rotat.slice(k).reverse(), ...rotat.slice(0, k)];
-    // }
-
-    // let tempFlipped = Array(rotat.length).fill(false);
-    // for (let i = 1; i <= 4; i++) {
-    //   const idx = rotat.indexOf(i);
-    //   if (idx !== -1) tempFlipped[idx] = true;
-    // }
-
-    // setFlipped(tempFlipped);
     setMatched(Array(16).fill(false));
-     setFlipped(Array(16).fill(true));
+    setFlipped(Array(16).fill(true));
     setTimeout(() => {
       setFlipped(Array(16).fill(false));
     }, 1500);
@@ -76,22 +63,20 @@ const Game1 = () => {
   }, [gameOver]);
 
   useEffect(() => {
-    if (matched.every(Boolean) && matched.length > 0 && !gameOver) {
+    if (matched.length > 0 && matched.every(Boolean) && !gameOver) {
       setGameOver(true);
     }
-  }, [matched]);
+  }, [matched, gameOver]);
 
   useEffect(() => {
     if (gameOver && user?.email) {
       axios.post('http://localhost:2089/game1/update', {
         email: user.email,
-        time: time,
+        time,
         flips: flipCount
       })
-      .then(res => {
-        setStats(res.data.stats);
-      })
-      .catch(err => console.error('Error posting stats:', err));
+        .then(res => setStats(res.data.stats))
+        .catch(err => console.error('Error posting stats:', err));
     }
   }, [gameOver, time, flipCount, user]);
 
@@ -99,11 +84,11 @@ const Game1 = () => {
     if (user?.email) {
       setLoadingStats(true);
       axios.get(`http://localhost:2089/game1/${user.email}`)
-        .then((res) => {
+        .then(res => {
           setStats(res.data.stats);
           setLoadingStats(false);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error('Error fetching stats:', err);
           setLoadingStats(false);
         });

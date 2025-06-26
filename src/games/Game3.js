@@ -15,8 +15,20 @@ const animalImages = [
   "https://img.freepik.com/free-photo/dumpling-bun-isolated_1203-3174.jpg",
   "https://img.freepik.com/free-photo/yakitori-chicken-stick-close-up_181624-61208.jpg"
 ];
+
+// Utility to shuffle an array
+const shuffleArray = (array) => {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
+
 const Game3 = () => {
   const { user } = useContext(LoginContext);
+
   const [images, setImages] = useState([]);
   const [flipped, setFlipped] = useState(Array(20).fill(false));
   const [matched, setMatched] = useState(Array(20).fill(false));
@@ -28,17 +40,28 @@ const Game3 = () => {
   const [stats, setStats] = useState(null);
   const [loadingStats, setLoadingStats] = useState(false);
 
-  useEffect(() => {
+  const initializeGame = () => {
     const duplicated = [...animalImages.slice(0, 10), ...animalImages.slice(0, 10)];
-    const shuffled = duplicated.sort(() => Math.random() - 0.5);
+    const shuffled = shuffleArray(duplicated);
     setImages(shuffled);
     setFlipped(Array(20).fill(false));
     setMatched(Array(20).fill(false));
+    setFirstIndex(null);
+    setLockBoard(false);
+    setTime(0);
+    setFlipCount(0);
+    setGameOver(false);
+  };
+
+  useEffect(() => {
+    initializeGame();
   }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (!gameOver) setTime(t => t + 1);
+      if (!gameOver) {
+        setTime((t) => t + 1);
+      }
     }, 1000);
     return () => clearInterval(timer);
   }, [gameOver]);
@@ -47,24 +70,21 @@ const Game3 = () => {
     if (matched.every(Boolean) && matched.length > 0 && !gameOver) {
       setGameOver(true);
     }
-  }, [matched]);
+  }, [matched, gameOver]);
 
   useEffect(() => {
     if (gameOver && user?.email) {
       axios.post('http://localhost:2089/game3/update', {
         email: user.email,
-        time: time,
-        flips: flipCount
+        time,
+        flips: flipCount,
       })
-      .then(response => {
-        console.log('Stats updated:', response.data);
-        setStats(response.data.stats);
-      })
-      .catch(error => {
-        console.error('Error updating stats:', error);
-      });
+        .then((res) => {
+          setStats(res.data.stats);
+        })
+        .catch((err) => console.error('Error posting stats:', err));
     }
-  }, [gameOver, user, time, flipCount]);
+  }, [gameOver, user?.email, time, flipCount]);
 
   useEffect(() => {
     if (user?.email) {
@@ -79,7 +99,7 @@ const Game3 = () => {
           setLoadingStats(false);
         });
     }
-  }, [user]);
+  }, [user?.email]);
 
   const handleFlip = (index) => {
     if (lockBoard || flipped[index] || matched[index]) return;
@@ -91,12 +111,13 @@ const Game3 = () => {
     if (firstIndex === null) {
       setFirstIndex(index);
     } else {
-      setFlipCount((count) => count + 1);
+      setFlipCount((prev) => prev + 1);
       if (images[firstIndex] === images[index]) {
         const newMatched = [...matched];
         newMatched[firstIndex] = true;
         newMatched[index] = true;
         setMatched(newMatched);
+        setFirstIndex(null);
       } else {
         setLockBoard(true);
         setTimeout(() => {
@@ -104,14 +125,28 @@ const Game3 = () => {
           reset[firstIndex] = false;
           reset[index] = false;
           setFlipped(reset);
+          setFirstIndex(null);
           setLockBoard(false);
-        }, 500);
+        }, 600);
       }
-      setFirstIndex(null);
     }
   };
 
-  const restart = () => window.location.reload();
+  const restart = () => {
+    initializeGame();
+    if (user?.email) {
+      setLoadingStats(true);
+      axios.get(`http://localhost:2089/game3/${user.email}`)
+        .then((res) => {
+          setStats(res.data.stats);
+          setLoadingStats(false);
+        })
+        .catch((err) => {
+          console.error('Error refreshing stats:', err);
+          setLoadingStats(false);
+        });
+    }
+  };
 
   return (
     <div className="memory-wrapper">
@@ -152,7 +187,7 @@ const Game3 = () => {
           <h2>🎉 Game Over!</h2>
           <h3>Your Time: {time}s</h3>
           <h3>Total Flips: {flipCount}</h3>
-          <button onClick={restart} className="memory-restart">Try Again</button>
+          <button onClick={restart} className="memory-restart">🔁 Try Again</button>
         </div>
       )}
 
@@ -177,4 +212,3 @@ const Game3 = () => {
 };
 
 export default Game3;
-
